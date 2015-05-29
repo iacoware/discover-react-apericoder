@@ -1,5 +1,23 @@
 var React = require('react');
 
+var Product = React.createClass({
+	handleClick: function() {
+		this.props.onAdd(this.props.product.id);
+	},
+
+	render: function() {
+		return (
+			<div className="catalog-item">
+				<div>{this.props.product.name}</div>
+				<div>{this.props.product.price}</div>
+				<button
+					onClick={this.handleClick}
+					className="btn btn-warning btn-xs">Add</button>
+			</div>
+		);
+	}
+});
+
 var Catalog = React.createClass({
 
 	render: function() {
@@ -8,12 +26,7 @@ var Catalog = React.createClass({
 				<h3>You're browsing through {this.props.products.length} products</h3>
 
 				{this.props.products.map(p => {
-					return (
-						<div className="catalog-item">
-							<div>{p.name}</div>
-							<div>{p.price}</div>
-						</div>
-					);
+					return <Product onAdd={this.props.onAdd} product={p} />
 				})}
 			</div>
 		);

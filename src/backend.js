@@ -1,10 +1,30 @@
 var pid = 0;
 
 var _products = [
-	{id: pid++, name: 'apple', price: 100},
-	{id: pid++, name: 'orange', price: 200},
-	{id: pid++, name: 'banana', price: 300},
-	{id: pid++, name: 'cynnamon', price: 400}
+	{id: pid++, name: 'product '+pid, price: 100},
+	{id: pid++, name: 'product '+pid, price: 200},
+	{id: pid++, name: 'product '+pid, price: 300},
+	{id: pid++, name: 'product '+pid, price: 400},
+
+	{id: pid++, name: 'product '+pid, price: 100},
+	{id: pid++, name: 'product '+pid, price: 200},
+	{id: pid++, name: 'product '+pid, price: 300},
+	{id: pid++, name: 'product '+pid, price: 400},
+
+	{id: pid++, name: 'product '+pid, price: 100},
+	{id: pid++, name: 'product '+pid, price: 200},
+	{id: pid++, name: 'product '+pid, price: 300},
+	{id: pid++, name: 'product '+pid, price: 400},
+
+	{id: pid++, name: 'product '+pid, price: 100},
+	{id: pid++, name: 'product '+pid, price: 200},
+	{id: pid++, name: 'product '+pid, price: 300},
+	{id: pid++, name: 'product '+pid, price: 400},
+
+	{id: pid++, name: 'product '+pid, price: 100},
+	{id: pid++, name: 'product '+pid, price: 200},
+	{id: pid++, name: 'product '+pid, price: 300},
+	{id: pid++, name: 'product '+pid, price: 400},
 ];
 
 var _cart = {

@@ -10,6 +10,10 @@ var React = require('react'),
 	store = require('./store');
 
 var App = React.createClass({
+	addProduct: function(productId) {
+		console.log('add product', productId);
+	},
+
     render: function() {
     	var products = store.getProducts();
 
@@ -19,7 +23,7 @@ var App = React.createClass({
 
 				<div className="row">
 					<div className="col-md-8">
-						<Catalog products={products}/>
+						<Catalog products={products} onAdd={this.addProduct}/>
 					</div>
 
 					<div className="col-md-4">
