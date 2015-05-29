@@ -6,10 +6,12 @@ var Product = React.createClass({
 	},
 
 	render: function() {
+		var p = this.props.product;
+
 		return (
 			<div className="catalog-item">
-				<div>{this.props.product.name}</div>
-				<div>{this.props.product.price}</div>
+				<div>{p.name}</div>
+				<div>{p.price}</div>
 				<button
 					onClick={this.handleClick}
 					className="btn btn-warning btn-xs">Add</button>
@@ -19,19 +21,18 @@ var Product = React.createClass({
 });
 
 var Catalog = React.createClass({
-
 	render: function() {
+
 		return (
 			<div className="catalog">
 				<h3>You're browsing through {this.props.products.length} products</h3>
 
 				{this.props.products.map(p => {
-					return <Product onAdd={this.props.onAdd} product={p} />
+					return <Product onAdd={this.props.onAdd} product={p}/>
 				})}
 			</div>
 		);
 	}
-
 });
 
 module.exports = Catalog;

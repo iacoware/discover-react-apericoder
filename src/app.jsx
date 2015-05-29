@@ -5,19 +5,45 @@ require('bootstrap');
 
 //here starts the app
 var React = require('react'),
-	Catalog = require('./catalog.jsx'),
 	backend = require('./backend'),
-	store = require('./store');
+	store = require('./store'),
+	Catalog = require('./catalog.jsx'),
+	Cart = require('./cart.jsx');
+
+var getAppState = function() {
+	return {
+		products: store.getProducts(),
+		cart: store.getCart()
+	};
+};
 
 var App = React.createClass({
+	getInitialState: function() {
+		return getAppState();
+	},
+
+	componentDidMount: function() {
+		store.onChange(this.updateState);
+	},
+
+	componentWillUnmount: function() {
+		store.removeChangeListener(this.updateState);
+	},
+
+	updateState: function() {
+		this.setState(getAppState());
+	},
+
 	addProduct: function(productId) {
 		console.log('add product', productId);
+		store.addToCart(productId);
 	},
 
     render: function() {
-    	var products = store.getProducts();
+		var products = this.state.products;
+		var cart = this.state.cart;
 
-        return (
+		return (
 			<div>
 				<h1 className="app-title">React shopping cart</h1>
 
@@ -25,8 +51,8 @@ var App = React.createClass({
 					<div className="col-md-8">
 						<Catalog products={products} onAdd={this.addProduct}/>
 					</div>
-
 					<div className="col-md-4">
+						<Cart cart={cart}/>
 					</div>
 				</div>
 			</div>
@@ -34,39 +60,7 @@ var App = React.createClass({
     }
 });
 
-var p1 = backend.getProducts().then(store.setProducts.bind(store));
-var p2 = backend.getCart().then(store.setCart.bind(store));
+backend.getProducts().then(store.setProducts.bind(store));
+backend.getCart().then(store.setCart.bind(store));
 
-Promise.all([p1, p2]).then(function() {
-	React.render(<App/>, document.getElementById('example'));
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-<div className="row">
-	<div className="col-md-8">
-		<Catalog products={products} onAdd={this.addProduct}/>
-	</div>
-	<div className="col-md-4">
-		<Cart cart={cart}/>
-	</div>
-</div>
-*/
+React.render(<App/>, document.getElementById('example'));
