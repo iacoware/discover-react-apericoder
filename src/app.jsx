@@ -4,19 +4,39 @@ global.jQuery = require('jquery');
 require('bootstrap');
 
 //here starts the app
-var React = require("react");
+var React = require('react'),
+	Catalog = require('./catalog.jsx'),
+	backend = require('./backend'),
+	store = require('./store');
 
 var App = React.createClass({
     render: function() {
+    	var products = store.getProducts();
+
         return (
 			<div>
 				<h1 className="app-title">React shopping cart</h1>
+
+				<div className="row">
+					<div className="col-md-8">
+						<Catalog products={products}/>
+					</div>
+
+					<div className="col-md-4">
+					</div>
+				</div>
 			</div>
 		);
     }
 });
 
-React.render(<App/>, document.getElementById('example'));
+var p1 = backend.getProducts().then(store.setProducts.bind(store));
+var p2 = backend.getCart().then(store.setCart.bind(store));
+
+Promise.all([p1, p2]).then(function() {
+	React.render(<App/>, document.getElementById('example'));
+});
+
 
 
 
