@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "bootstrap": "^3.3.4",
+    "events": "^1.0.2",
+    "jquery": "^2.1.4",
     "react": "^0.12.2"
   },
   "devDependencies": {
@@ -16,7 +19,7 @@
   "scripts": {
     "watch": "watchify -t babelify ./src/app.jsx -o ./dist/bundle.js -v -d",
     "server:simple": "python -m SimpleHTTPServer 3123",
-    "server:reload": "live-server",
+    "server:reload": "live-server --port=8080",
     "start": "parallelshell \"npm run watch\" \"npm run server:reload\""
   },
   "author": "",
